@@ -3,8 +3,8 @@ import axios from 'axios'
 
 export const signUp = credentials => {
   return axios({
+    url: apiUrl + '/sign-up/',
     method: 'POST',
-    url: apiUrl + '/sign-up',
     data: {
       credentials: {
         email: credentials.email,
@@ -17,7 +17,7 @@ export const signUp = credentials => {
 
 export const signIn = credentials => {
   return axios({
-    url: apiUrl + '/sign-in',
+    url: apiUrl + '/sign-in/',
     method: 'POST',
     data: {
       credentials: {
@@ -30,20 +30,20 @@ export const signIn = credentials => {
 
 export const signOut = user => {
   return axios({
-    url: apiUrl + '/sign-out',
+    url: apiUrl + '/sign-out/',
     method: 'DELETE',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Token ${user.token}`
     }
   })
 }
 
 export const changePassword = (passwords, user) => {
   return axios({
-    url: apiUrl + '/change-password',
+    url: apiUrl + '/change-pw/',
     method: 'PATCH',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Token ${user.token}`
     },
     data: {
       passwords: {
