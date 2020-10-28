@@ -9,6 +9,8 @@ import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import CreatePost from '../Post/CreatePost'
+import OnePost from '../Post/OnePost'
+import MessageBoard from '../Board/MessageBoard'
 
 class App extends Component {
   constructor () {
@@ -55,8 +57,14 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password/' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/posts/' render={() => (
+          <AuthenticatedRoute exact user={user} path='/posts/' render={() => (
             <CreatePost msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute exact user={user} path='/posts/' render={() => (
+            <MessageBoard msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute exact user={user} path='/posts/:id/' render={() => (
+            <OnePost msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
