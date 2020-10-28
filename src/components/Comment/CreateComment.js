@@ -7,12 +7,11 @@ import apiUrl from '../../apiConfig'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-class CreatePost extends Component {
+class CreateComment extends Component {
   constructor (props) {
     super(props)
     // create state to store title and content of post
     this.state = {
-      title: '',
       content: ''
     }
     this.handleChange = this.handleChange.bind(this)
@@ -28,35 +27,33 @@ class CreatePost extends Component {
     event.preventDefault()
     console.log('state is', this.state)
     console.log('this.props is', this.props)
+
     // make API call
     axios({
-      url: apiUrl + '/posts/',
+      url: apiUrl + '/comments/',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Token ${this.props.user.token}`
       },
       data: {
-        post: {
-          title: this.state.title,
+        comment: {
           content: this.state.content,
-          // something is wrong here.... the ID is what I
-          // think it should be, but that is not being accepted by the backend
-          owner: this.props.user.id
+          owner: this.props.user,
+          post: this.props.match.params.id
         }
       }
     })
     // handle success / failure
-      .then((res) => console.log(res))
+      .then(res => console.log(res))
       .then(() => (
         this.props.msgAlert({
           heading: 'Create Success',
           variant: 'success',
-          message: 'You created a post!'
+          message: 'You created a comment!'
         })
       ))
       .then(() => this.setState({
-        title: '',
         content: ''
       })
       )
@@ -75,31 +72,20 @@ class CreatePost extends Component {
         <div className="form-area">
           <Form onSubmit={this.handleSubmit}>
             <br styles="clear:both" />
-            <Form.Group controlId="title">
-              <Form.Control
-                required
-                type="text"
-                name="title"
-                placeholder="Title"
-                maxLength="100"
-                value={this.state.title}
-                onChange={this.handleChange}/>
-            </Form.Group>
-
             <Form.Group controlId="content">
               <Form.Control
                 required
                 type="text"
                 as="textarea"
                 name="content"
-                placeholder="Content"
+                placeholder="Add a comment"
                 maxLength="200"
                 rows="7"
                 value={this.state.content}
                 onChange={this.handleChange} />
             </Form.Group>
 
-            <Button type="submit" className="btn btn-primary pull-right" >Add Post</Button>
+            <Button type="submit" className="btn btn-primary pull-right" >Add Comment</Button>
           </Form>
         </div>
       </div>
@@ -107,4 +93,4 @@ class CreatePost extends Component {
   }
 }
 
-export default withRouter(CreatePost)
+export default withRouter(CreateComment)

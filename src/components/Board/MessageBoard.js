@@ -51,6 +51,7 @@ class MessageBoard extends Component {
         {boardPosts.map(post => (
           <div key={post.id}>
             <h4>{post.title}</h4>
+            <h6>by {post.owner.email}</h6>
             <p>{post.content}</p>
             <Link to={`/posts/${post.id}/`}><Button>See Post</Button></Link>
           </div>

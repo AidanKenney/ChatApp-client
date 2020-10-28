@@ -11,6 +11,8 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 import CreatePost from '../Post/CreatePost'
 import OnePost from '../Post/OnePost'
 import MessageBoard from '../Board/MessageBoard'
+import UpdatePost from '../Post/UpdatePost'
+import UpdateComment from '../Comment/UpdateComment'
 
 class App extends Component {
   constructor () {
@@ -65,6 +67,12 @@ class App extends Component {
           )} />
           <AuthenticatedRoute exact user={user} path='/posts/:id/' render={() => (
             <OnePost msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute exact user={user} path='/posts/:id/edit/' render={() => (
+            <UpdatePost msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute exact user={user} path='/comments/:id/edit/' render={() => (
+            <UpdateComment msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>

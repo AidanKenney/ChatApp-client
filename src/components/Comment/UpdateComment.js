@@ -7,16 +7,29 @@ import apiUrl from '../../apiConfig'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-class CreatePost extends Component {
+class UpdateComment extends Component {
   constructor (props) {
     super(props)
     // create state to store title and content of post
     this.state = {
-      title: '',
-      content: ''
+      content: '',
+      post: ''
     }
-    this.handleChange = this.handleChange.bind(this)
+    // this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  // make API call to get single post with comments
+  componentDidMount () {
+    axios({
+      url: apiUrl + '/comments/' + this.props.match.params.id + '/',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.props.user.token}`
+      }
+    })
+      .then(res => this.setState({ content: res.data.comment.content, post: res.data.comment.post }))
   }
 
   handleChange = event => this.setState({
@@ -30,36 +43,29 @@ class CreatePost extends Component {
     console.log('this.props is', this.props)
     // make API call
     axios({
-      url: apiUrl + '/posts/',
-      method: 'POST',
+      url: apiUrl + '/comments/' + this.props.match.params.id + '/',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Token ${this.props.user.token}`
       },
       data: {
-        post: {
-          title: this.state.title,
+        comment: {
           content: this.state.content,
-          // something is wrong here.... the ID is what I
-          // think it should be, but that is not being accepted by the backend
-          owner: this.props.user.id
+          owner: this.props.user.id,
+          post: this.state.post
         }
       }
     })
     // handle success / failure
-      .then((res) => console.log(res))
+      .then(res => console.log(res))
       .then(() => (
         this.props.msgAlert({
           heading: 'Create Success',
           variant: 'success',
-          message: 'You created a post!'
+          message: 'You updated a comment!'
         })
       ))
-      .then(() => this.setState({
-        title: '',
-        content: ''
-      })
-      )
       .catch(() => (
         this.props.msgAlert({
           heading: 'Create Failure',
@@ -75,16 +81,6 @@ class CreatePost extends Component {
         <div className="form-area">
           <Form onSubmit={this.handleSubmit}>
             <br styles="clear:both" />
-            <Form.Group controlId="title">
-              <Form.Control
-                required
-                type="text"
-                name="title"
-                placeholder="Title"
-                maxLength="100"
-                value={this.state.title}
-                onChange={this.handleChange}/>
-            </Form.Group>
 
             <Form.Group controlId="content">
               <Form.Control
@@ -92,14 +88,13 @@ class CreatePost extends Component {
                 type="text"
                 as="textarea"
                 name="content"
-                placeholder="Content"
                 maxLength="200"
                 rows="7"
                 value={this.state.content}
                 onChange={this.handleChange} />
             </Form.Group>
 
-            <Button type="submit" className="btn btn-primary pull-right" >Add Post</Button>
+            <Button type="submit" className="btn btn-primary pull-right" >Update Post</Button>
           </Form>
         </div>
       </div>
@@ -107,4 +102,4 @@ class CreatePost extends Component {
   }
 }
 
-export default withRouter(CreatePost)
+export default withRouter(UpdateComment)
