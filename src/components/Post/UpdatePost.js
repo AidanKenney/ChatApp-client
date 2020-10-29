@@ -5,7 +5,31 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  background: #D3D3D3;
+  border-radius: 3px;
+  border: 2px solid #2F4F4F;
+  margin: 1em 1em;
+  padding: 0.25em 1em;
+
+  & label {
+      padding-left: 1em;
+      padding-top: 1em;
+    }
+`
+
+const StylishButton = styled.button`
+  background: #708090;
+  border-radius: 3px;
+  border: 2px solid #2F4F4F;
+  font-size: 14px;
+  color: #F9F9F9;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+`
 
 class UpdatePost extends Component {
   constructor (props) {
@@ -90,10 +114,10 @@ class UpdatePost extends Component {
 
   render () {
     return (
-      <div className="col-md-5">
+      <Wrapper>
         <div className="form-area">
           <Form onSubmit={this.handleSubmit}>
-            <br styles="clear:both" />
+            <label>Post by {this.state.post.owner.email}</label>
             <Form.Group controlId="title">
               <Form.Control
                 required
@@ -113,15 +137,15 @@ class UpdatePost extends Component {
                 name="content"
                 placeholder="Content"
                 maxLength="200"
-                rows="7"
+                rows="4"
                 value={this.state.post.content}
                 onChange={this.handleChange} />
             </Form.Group>
 
-            <Button type="submit" className="btn btn-primary pull-right" >Update Post</Button>
+            <StylishButton type="submit" className="btn btn-primary pull-right" >Update Post</StylishButton>
           </Form>
         </div>
-      </div>
+      </Wrapper>
     )
   }
 }

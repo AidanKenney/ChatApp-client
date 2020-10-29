@@ -12,8 +12,13 @@ const Wrapper = styled.div`
   background: #D3D3D3;
   border-radius: 3px;
   border: 2px solid #2F4F4F;
-  margin: 0 1em;
+  margin: 1em 1em;
   padding: 0.25em 1em;
+
+  & label {
+      padding-left: 1em;
+      padding-top: 1em;
+    }
 `
 const StylishButton = styled.button`
   background: #708090;
@@ -89,9 +94,9 @@ class CreatePost extends Component {
 
   render () {
     return (
-      <Wrapper className="col-md-5">
+      <Wrapper>
         <Form onSubmit={this.handleSubmit}>
-          <br styles="clear:both" />
+          <label>Create a post</label>
           <Form.Group controlId="title">
             <Form.Control
               required

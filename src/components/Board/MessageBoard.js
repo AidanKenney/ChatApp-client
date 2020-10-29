@@ -12,8 +12,20 @@ const Wrapper = styled.div`
   background: #D3D3D3;
   border-radius: 3px;
   border: 2px solid #2F4F4F;
-  margin: 0 1em;
+  margin: 0.75em 1em;
   padding: 0.25em 1em;
+
+  & p {
+    padding-left: 1em;
+    padding-top: 1em;
+    margin-bottom: 0.5em;
+  }
+  & h3 {
+    padding-left: 1rem;
+  }
+  & h6 {
+    padding-left: 1em;
+  }
 `
 const StylishButton = styled.button`
   background: #708090;
@@ -68,9 +80,9 @@ class MessageBoard extends Component {
       <div>
         {boardPosts.map(post => (
           <Wrapper key={post.id}>
-            <h4>{post.title}</h4>
-            <h6>by {post.owner.email}</h6>
-            <p>{post.content}</p>
+            <p>Posted by {post.owner.email}</p>
+            <h3>{post.title}</h3>
+            <h6>{post.content}</h6>
             <Link to={`/posts/${post.id}/`}><StylishButton>See Post</StylishButton></Link>
           </Wrapper>
         ))}

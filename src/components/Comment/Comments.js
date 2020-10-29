@@ -24,6 +24,7 @@ const ContentWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   align-self: end;
+  justify-self: end;
 `
 
 const StylishButton = styled.button`
@@ -42,25 +43,19 @@ class Comments extends Component {
     this.state = {
       comments: []
     }
-    // this.handleDelete = this.handleDelete.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
     // this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleDelete = event => {
-    // console.log(this.props)
-    // console.log(event.target.id)
-    // const commentArray = this.props.comments
-    // const commentId = commentArray.find(x => x.id === event.target.id)
-    // console.log('commentID is', commentId)
     axios({
-      url: apiUrl + '/comments/' + event.target.id + '/',
+      url: apiUrl + '/comments/' + event.currentTarget.id + '/',
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Token ${this.props.user.token}`
       }
     })
-      .then(() => this.props.history.push(`/posts/${this.props.match.params.id}/`))
       .then(() => (
         this.props.msgAlert({
           heading: 'Delete Success',
@@ -80,7 +75,7 @@ class Comments extends Component {
   render () {
     const commentsOnPost = this.props.comments
     return (
-      <div className="col-md-10">
+      <div>
         {commentsOnPost.map(comment => (
           <CommentWrapper key={comment.id}>
 

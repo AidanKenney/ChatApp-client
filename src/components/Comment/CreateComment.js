@@ -14,7 +14,7 @@ const FormWrapper = styled.form`
   border: 2px solid #2F4F4F;
   display: flex;
   flex-direction: row;
-  margin: 0 1em;
+  margin: 1em 1em;
   padding: 0.25em 1em;
 `
 
@@ -94,7 +94,7 @@ class CreateComment extends Component {
 
   render () {
     return (
-      <div className="col-md-10">
+      <div>
         <div className="form-area">
           <FormWrapper onSubmit={this.handleSubmit}>
             <br styles="clear:both" />

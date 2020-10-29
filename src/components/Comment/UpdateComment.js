@@ -5,7 +5,31 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  background: #D3D3D3;
+  border-radius: 3px;
+  border: 2px solid #2F4F4F;
+  margin: 1em 1em;
+  padding: 0.25em 1em;
+
+  & label {
+      padding-left: 1em;
+      padding-top: 1em;
+    }
+`
+
+const StylishButton = styled.button`
+  background: #708090;
+  border-radius: 3px;
+  border: 2px solid #2F4F4F;
+  font-size: 14px;
+  color: #F9F9F9;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+`
 
 class UpdateComment extends Component {
   constructor (props) {
@@ -13,7 +37,8 @@ class UpdateComment extends Component {
     // create state to store title and content of post
     this.state = {
       content: '',
-      post: ''
+      post: '',
+      owner: ''
     }
     // this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -29,7 +54,7 @@ class UpdateComment extends Component {
         'Authorization': `Token ${this.props.user.token}`
       }
     })
-      .then(res => this.setState({ content: res.data.comment.content, post: res.data.comment.post }))
+      .then(res => this.setState({ content: res.data.comment.content, post: res.data.comment.post, owner: res.data.comment.owner.email }))
   }
 
   handleChange = event => this.setState({
@@ -77,11 +102,10 @@ class UpdateComment extends Component {
 
   render () {
     return (
-      <div className="col-md-5">
+      <Wrapper>
         <div className="form-area">
           <Form onSubmit={this.handleSubmit}>
-            <br styles="clear:both" />
-
+            <label>Comment by {this.state.owner}</label>
             <Form.Group controlId="content">
               <Form.Control
                 required
@@ -94,10 +118,10 @@ class UpdateComment extends Component {
                 onChange={this.handleChange} />
             </Form.Group>
 
-            <Button type="submit" className="btn btn-primary pull-right" >Update Post</Button>
+            <StylishButton type="submit" className="btn btn-primary pull-right" >Update Comment</StylishButton>
           </Form>
         </div>
-      </div>
+      </Wrapper>
     )
   }
 }
