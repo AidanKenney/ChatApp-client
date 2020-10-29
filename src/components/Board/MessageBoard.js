@@ -4,7 +4,7 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 // import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 // import Fragment from 'react-bootstrap/Fragment'
 import styled from 'styled-components'
 
@@ -13,6 +13,15 @@ const Wrapper = styled.div`
   border-radius: 3px;
   border: 2px solid #2F4F4F;
   margin: 0 1em;
+  padding: 0.25em 1em;
+`
+const StylishButton = styled.button`
+  background: #708090;
+  border-radius: 3px;
+  border: 2px solid #2F4F4F;
+  font-size: 14px;
+  color: #F9F9F9;
+  margin: 0.5em 1em;
   padding: 0.25em 1em;
 `
 
@@ -62,7 +71,7 @@ class MessageBoard extends Component {
             <h4>{post.title}</h4>
             <h6>by {post.owner.email}</h6>
             <p>{post.content}</p>
-            <Link to={`/posts/${post.id}/`}><Button>See Post</Button></Link>
+            <Link to={`/posts/${post.id}/`}><StylishButton>See Post</StylishButton></Link>
           </Wrapper>
         ))}
       </div>

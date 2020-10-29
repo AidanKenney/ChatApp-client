@@ -5,7 +5,34 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
+import styled from 'styled-components'
+
+const FormWrapper = styled.form`
+  background: #D3D3D3;
+  border-radius: 3px;
+  border: 2px solid #2F4F4F;
+  display: flex;
+  flex-direction: row;
+  margin: 0 1em;
+  padding: 0.25em 1em;
+`
+
+const StylishButton = styled.button`
+  background: #708090;
+  border-radius: 4px;
+  border: 2px solid #2F4F4F;
+  color: #F9F9F9;
+  height: 30px;
+  width: 30px;
+  margin: 0.7rem 0.3rem;
+  padding: 0.0em 0.0em;
+`
+
+const StyledSvg = styled.svg`
+  align-self: center;
+  display: inline-flex;
+`
 
 class CreateComment extends Component {
   constructor (props) {
@@ -67,11 +94,11 @@ class CreateComment extends Component {
 
   render () {
     return (
-      <div className="col-md-5">
+      <div className="col-md-10">
         <div className="form-area">
-          <Form onSubmit={this.handleSubmit}>
+          <FormWrapper onSubmit={this.handleSubmit}>
             <br styles="clear:both" />
-            <Form.Group controlId="content">
+            <Form.Group controlId="content" className="form-group">
               <Form.Control
                 required
                 type="text"
@@ -84,8 +111,10 @@ class CreateComment extends Component {
                 onChange={this.handleChange} />
             </Form.Group>
 
-            <Button type="submit" className="btn btn-primary pull-right" >Add Comment</Button>
-          </Form>
+            <StylishButton type="submit" className="btn btn-primary" ><StyledSvg width="1.5em" height="1.5em" viewBox="0 0 16 16" className="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </StyledSvg></StylishButton>
+          </FormWrapper>
         </div>
       </div>
     )

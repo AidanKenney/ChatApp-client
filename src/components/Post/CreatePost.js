@@ -19,7 +19,8 @@ const StylishButton = styled.button`
   background: #708090;
   border-radius: 3px;
   border: 2px solid #2F4F4F;
-  color: #D3D3D3;
+  font-size: 14px;
+  color: #F9F9F9;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
 `
