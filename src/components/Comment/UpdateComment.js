@@ -58,19 +58,19 @@ class UpdateComment extends Component {
       }
     })
     // handle success / failure
-      .then(res => console.log(res))
       .then(() => (
         this.props.msgAlert({
-          heading: 'Create Success',
+          heading: 'Update Success',
           variant: 'success',
           message: 'You updated a comment!'
         })
       ))
+      .then(() => this.props.history.push(`/posts/${this.state.post}/`))
       .catch(() => (
         this.props.msgAlert({
-          heading: 'Create Failure',
+          heading: 'Update Failure',
           variant: 'danger',
-          message: 'Error, create failed'
+          message: 'Error, update failed'
         })
       ))
   }

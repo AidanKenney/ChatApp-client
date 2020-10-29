@@ -14,37 +14,9 @@ class Comments extends Component {
     this.state = {
       comments: []
     }
+    // this.handleDelete = this.handleDelete.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
   }
-  // this.handleDelete = this.handleDelete.bind(this)
-  // this.handleSubmit = this.handleSubmit.bind(this)
-
-  // make API call to get single post with comments
-  // componentDidMount () {
-  //   axios({
-  //     url: apiUrl + '/posts/' + this.props.match.params.id + '/',
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Token ${this.props.user.token}`
-  //     }
-  //   })
-  //     .then(res => this.setState({ comments: res.data.post.comments }))
-  // }
-  //
-  // componentDidUpdate (prevProps) {
-  //   if (this.props !== prevProps) {
-  //     console.log('Component did update!')
-  //     axios({
-  //       url: apiUrl + '/posts/' + this.props.match.params.id + '/',
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Token ${this.props.user.token}`
-  //       }
-  //     })
-  //       .then(res => this.setState({ post: res.data.post }))
-  //   }
-  // }
 
   handleDelete = event => {
     // console.log(this.props)
@@ -60,7 +32,7 @@ class Comments extends Component {
         'Authorization': `Token ${this.props.user.token}`
       }
     })
-      .then(() => this.props.history.push('/posts/'))
+      .then(() => this.props.history.push(`/posts/${this.props.match.params.id}/`))
       .then(() => (
         this.props.msgAlert({
           heading: 'Delete Success',

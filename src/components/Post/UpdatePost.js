@@ -78,6 +78,7 @@ class UpdatePost extends Component {
           message: 'You updated your post!'
         })
       ))
+      .then(() => this.props.history.push(`/posts/${this.props.match.params.id}/`))
       .catch(() => (
         this.props.msgAlert({
           heading: 'Update Failure',

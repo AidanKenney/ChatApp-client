@@ -45,7 +45,6 @@ class CreateComment extends Component {
       }
     })
     // handle success / failure
-      .then(res => console.log(res))
       .then(() => (
         this.props.msgAlert({
           heading: 'Create Success',
