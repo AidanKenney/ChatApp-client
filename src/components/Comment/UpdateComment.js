@@ -89,7 +89,7 @@ class UpdateComment extends Component {
                 as="textarea"
                 name="content"
                 maxLength="200"
-                rows="7"
+                rows="1"
                 value={this.state.content}
                 onChange={this.handleChange} />
             </Form.Group>

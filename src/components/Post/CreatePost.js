@@ -5,7 +5,24 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  background: #D3D3D3;
+  border-radius: 3px;
+  border: 2px solid #2F4F4F;
+  margin: 0 1em;
+  padding: 0.25em 1em;
+`
+const StylishButton = styled.button`
+  background: #708090;
+  border-radius: 3px;
+  border: 2px solid #2F4F4F;
+  color: #D3D3D3;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+`
 
 class CreatePost extends Component {
   constructor (props) {
@@ -71,38 +88,36 @@ class CreatePost extends Component {
 
   render () {
     return (
-      <div className="col-md-5">
-        <div className="form-area">
-          <Form onSubmit={this.handleSubmit}>
-            <br styles="clear:both" />
-            <Form.Group controlId="title">
-              <Form.Control
-                required
-                type="text"
-                name="title"
-                placeholder="Title"
-                maxLength="100"
-                value={this.state.title}
-                onChange={this.handleChange}/>
-            </Form.Group>
+      <Wrapper className="col-md-5">
+        <Form onSubmit={this.handleSubmit}>
+          <br styles="clear:both" />
+          <Form.Group controlId="title">
+            <Form.Control
+              required
+              type="text"
+              name="title"
+              placeholder="Title"
+              maxLength="100"
+              value={this.state.title}
+              onChange={this.handleChange}/>
+          </Form.Group>
 
-            <Form.Group controlId="content">
-              <Form.Control
-                required
-                type="text"
-                as="textarea"
-                name="content"
-                placeholder="Content"
-                maxLength="200"
-                rows="7"
-                value={this.state.content}
-                onChange={this.handleChange} />
-            </Form.Group>
+          <Form.Group controlId="content">
+            <Form.Control
+              required
+              type="text"
+              as="textarea"
+              name="content"
+              placeholder="Content"
+              maxLength="200"
+              rows="2"
+              value={this.state.content}
+              onChange={this.handleChange} />
+          </Form.Group>
 
-            <Button type="submit" className="btn btn-primary pull-right" >Add Post</Button>
-          </Form>
-        </div>
-      </div>
+          <StylishButton type="submit" className="btn btn-primary pull-right" >Add Post</StylishButton>
+        </Form>
+      </Wrapper>
     )
   }
 }

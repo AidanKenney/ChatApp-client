@@ -79,7 +79,7 @@ class CreateComment extends Component {
                 name="content"
                 placeholder="Add a comment"
                 maxLength="200"
-                rows="7"
+                rows="1"
                 value={this.state.content}
                 onChange={this.handleChange} />
             </Form.Group>

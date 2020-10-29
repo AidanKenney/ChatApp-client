@@ -8,6 +8,15 @@ import apiUrl from '../../apiConfig'
 
 // import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  background: #D3D3D3;
+  border-radius: 3px;
+  border: 2px solid #2F4F4F;
+  margin: 0 1em;
+  padding: 0.25em 1em;
+`
 
 class OnePost extends Component {
   constructor (props) {
@@ -83,7 +92,7 @@ class OnePost extends Component {
   render () {
     // const commentsOnPost = this.state.post.comments
     return (
-      <div className="col-md-5">
+      <Wrapper className="col-md-5">
         <h2>{this.state.post.title}</h2>
         <h4>by {this.state.post.owner.email}</h4>
         <p>{this.state.post.content}</p>
@@ -91,7 +100,7 @@ class OnePost extends Component {
         <Button onClick={this.handleDelete}>Delete Post</Button>
         <CreateComment user={this.props.user} msgAlert={this.props.msgAlert}/>
         <Comments user={this.props.user} comments={this.state.post.comments} msgAlert={this.props.msgAlert}/>
-      </div>
+      </Wrapper>
     )
   }
 }
