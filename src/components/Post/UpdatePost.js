@@ -19,20 +19,25 @@ const Wrapper = styled.div`
       padding-left: 1em;
       padding-top: 1em;
     }
+
+  &:hover {
+    border: 1px solid #82858D;
+  }
 `
 
 const StylishButton = styled.button`
-  background: #708090;
+  background: #3F88C5;
   border-radius: 3px;
-  border: 2px solid #2F4F4F;
+  border: 2px solid #BBBFCA;
   font-size: 14px;
   color: #F9F9F9;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
 
   &:hover {
-    background: #2F4F4F;
-    border: 2px solid #blue;
+    background: #F9F9F9;
+    border: 2px solid #E94F37;
+    color: #3F88C5;
   }
 `
 

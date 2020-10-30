@@ -1,36 +1,38 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
+// import CreateComment from '../Comment/CreateComment'
+// import Comments from '../Comment/Comments'
+// import messages from '../AutoDismissAlert/messages'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 // import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
-// import Fragment from 'react-bootstrap/Fragment'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  background: #F4F4F2;
-  border-radius: 3px;
-  border: 1px solid #BBBFCA;
-  margin: 0.75em 1em;
-  padding: 0.25em 1em;
+   background: #F4F4F2;
+   border-radius: 3px;
+   border: 1px solid #BBBFCA;
+   margin: 0.75em 1em;
+   padding: 0.25em 1em;
 
-  & p {
-    padding-left: 1em;
-    padding-top: 1em;
-    margin-bottom: 0.5em;
-  }
-  & h3 {
-    padding-left: 1rem;
-  }
-  & h6 {
-    padding-left: 1em;
-  }
+   & p {
+     padding-left: 1em;
+     padding-top: 1em;
+     margin-bottom: 0.5em;
+   }
+   & h3 {
+     padding-left: 1rem;
+   }
+   & h6 {
+     padding-left: 1em;
+   }
+   &:hover {
+     border: 1px solid #82858D;
+   }
+ `
 
-  &:hover {
-    border: 1px solid #82858D;
-  }
-`
 const StylishButton = styled.button`
   background: #3F88C5;
   border-radius: 3px;
@@ -47,16 +49,25 @@ const StylishButton = styled.button`
   }
 `
 
-class MessageBoard extends Component {
+class UserProfile extends Component {
   constructor (props) {
     super(props)
-
-    // state of the Message Board will be filled with posts
+    // create state to store title and content of post
     this.state = {
       posts: []
+      // post: {
+      //   title: '',
+      //   content: '',
+      //   owner: {},
+      //   comments: []
+      // }
+
     }
+    // this.handleDelete = this.handleDelete.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
   }
-  // make API call to get all posts
+
+  // make API call to get posts from certain user
   componentDidMount () {
     axios({
       url: apiUrl + '/posts/',
@@ -66,28 +77,18 @@ class MessageBoard extends Component {
         'Authorization': `Token ${this.props.user.token}`
       }
     })
-      .then(res => this.setState({ posts: res.data.posts }))
-  }
-
-  // get all posts again if a new post is added
-  componentDidUpdate (prevProps) {
-    if (this.props !== prevProps) {
-      axios({
-        url: apiUrl + '/posts/',
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Token ${this.props.user.token}`
-        }
-      })
-        .then(res => this.setState({ posts: res.data.posts }))
-    }
+      .then(res => res.data.posts.filter(post => post.owner.id === this.props.user.id))
+      .then(res => this.setState({ posts: res }))
   }
 
   render () {
     const boardPosts = this.state.posts
+    const postOwner = this.state.posts.find(post => post.owner.email)
+    console.log('this is post owner', postOwner)
     return (
       <div>
+
+        <h2>All posts by...</h2>
         {boardPosts.map(post => (
           <Wrapper key={post.id}>
             <p>Posted by {post.owner.email}, last updated at {post.updated_at}</p>
@@ -101,4 +102,4 @@ class MessageBoard extends Component {
   }
 }
 
-export default withRouter(MessageBoard)
+export default withRouter(UserProfile)

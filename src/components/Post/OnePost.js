@@ -18,13 +18,17 @@ const Wrapper = styled.div`
   padding: 0.25em 1em;
 `
 const GridWrapper = styled.div`
-  background: #D3D3D3;
+  background: #F4F4F2;
   border-radius: 3px;
-  border: 2px solid #2F4F4F;
+  border: 1px solid #BBBFCA;
   display: grid;
   grid-template-columns: [first] 75% [line2] 25% [end];
   margin: 11px 1em;
   padding: 0.25em 1em;
+
+  &:hover {
+    border: 1px solid #82858D;
+  }
 `
 
 const PostWrapper = styled.div`
@@ -41,16 +45,18 @@ const ButtonWrapper = styled.div`
 `
 
 const StylishButton = styled.button`
-  background: #708090;
-  border-radius: 4px;
-  border: 2px solid #2F4F4F;
+  background: #3F88C5;
+  border-radius: 3px;
+  border: 2px solid #BBBFCA;
+  font-size: 14px;
   color: #F9F9F9;
-  margin: 0.5em 0.2em;
-  padding: 0.25em 0.5em;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
 
   &:hover {
-    background: #2F4F4F;
-    border: 2px solid #blue;
+    background: #F9F9F9;
+    border: 2px solid #E94F37;
+    color: #3F88C5;
   }
 `
 
@@ -142,7 +148,7 @@ class OnePost extends Component {
       <Wrapper>
         <GridWrapper>
           <PostWrapper>
-            <p>Posted by {this.state.post.owner.email}</p>
+            <p>Posted by <Link to={`/profile/${this.state.post.owner.id}`}>{this.state.post.owner.email}</Link></p>
             <h2>{this.state.post.title}</h2>
             <h6>{this.state.post.content}</h6>
           </PostWrapper>

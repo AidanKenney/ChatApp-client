@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar'
 
 const authenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#posts/">Posts</Nav.Link>
+    <Nav.Link href="#profile/">Profile</Nav.Link>
     <Nav.Link href="#change-password">Change Password</Nav.Link>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
   </Fragment>
@@ -25,7 +25,7 @@ const authenticatedOptions = (
 
 const Header = ({ user }) => (
   <Navbar className="header" expand="md">
-    <Navbar.Brand className="header" href="#">
+    <Navbar.Brand className="header" href="#posts/">
       Message Board
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />

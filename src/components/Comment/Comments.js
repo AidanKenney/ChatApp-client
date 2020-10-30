@@ -9,13 +9,17 @@ import apiUrl from '../../apiConfig'
 import styled from 'styled-components'
 
 const CommentWrapper = styled.div`
-  background: #D3D3D3;
+  background: #F4F4F2;
   border-radius: 3px;
-  border: 2px solid #2F4F4F;
+  border: 1px solid #BBBFCA;
   display: grid;
   grid-template-columns: [first] 75% [line2] 25% [end];
   margin: 11px 1em;
   padding: 0.25em 1em;
+
+  &:hover {
+    border: 1px solid #82858D;
+  }
 `
 const ContentWrapper = styled.div`
   margin: 0.5em 0.5em;
@@ -28,16 +32,17 @@ const ButtonWrapper = styled.div`
 `
 
 const StylishButton = styled.button`
-  background: #708090;
+  background: #3F88C5;
   border-radius: 4px;
-  border: 2px solid #2F4F4F;
+  border: 2px solid #BBBFCA;
   color: #F9F9F9;
   margin: 0.5em 0.15em;
   padding: 0.25em 0.5em;
 
   &:hover {
-    background: #2F4F4F;
-    border: 2px solid #blue;
+    background: #F9F9F9;
+    border: 2px solid #E94F37;
+    color: #3F88C5;
   }
 `
 
@@ -98,7 +103,7 @@ class Comments extends Component {
         {commentsOnPost.map(comment => (
           <CommentWrapper key={comment.id}>
 
-            <ContentWrapper>{comment.content}, by {comment.owner.email}</ContentWrapper>
+            <ContentWrapper>{comment.content}, by <Link to={`/profile/${comment.owner.id}`}>{comment.owner.email}</Link></ContentWrapper>
 
             { this.props.user.id === comment.owner.id ? userOptions(comment) : '' }
 

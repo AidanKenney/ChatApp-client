@@ -5,6 +5,12 @@
   width: 80%;
 }
 
+.form-control {
+  &:hover {
+    border: 1px solid #3F88C5;
+  }
+}
+
 body {
   background-color: #F5F5F5;
 }
@@ -14,5 +20,9 @@ body {
 }
 
 .navbar-light .navbar-brand {
+  color: #F5F5F5;
+}
+
+.navbar-light .navbar-nav .nav-link {
   color: #F5F5F5;
 }

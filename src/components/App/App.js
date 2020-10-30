@@ -13,6 +13,8 @@ import OnePost from '../Post/OnePost'
 import MessageBoard from '../Board/MessageBoard'
 import UpdatePost from '../Post/UpdatePost'
 import UpdateComment from '../Comment/UpdateComment'
+import UserProfile from '../Profile/UserProfile'
+import OtherUserProfile from '../Profile/OtherUserProfile'
 
 class App extends Component {
   constructor () {
@@ -76,6 +78,12 @@ class App extends Component {
           )} />
           <AuthenticatedRoute exact user={user} path='/comments/:id/edit/' render={() => (
             <UpdateComment msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute exact user={user} path='/profile/' render={() => (
+            <UserProfile msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute exact user={user} path='/profile/:id/' render={() => (
+            <OtherUserProfile msgAlert={this.msgAlert} user={user}/>
           )} />
         </main>
       </Fragment>
