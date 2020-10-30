@@ -12,6 +12,7 @@
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
     "fs-extra": "3.0.1",
+    "moment": "^2.29.1",
     "object-assign": "4.1.1",
     "promise": "8.0.1",
     "raf": "3.4.0",

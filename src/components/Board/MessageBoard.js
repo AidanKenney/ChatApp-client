@@ -7,6 +7,7 @@ import apiUrl from '../../apiConfig'
 // import Button from 'react-bootstrap/Button'
 // import Fragment from 'react-bootstrap/Fragment'
 import styled from 'styled-components'
+import moment from 'moment'
 
 const Wrapper = styled.div`
   background: #F4F4F2;
@@ -86,11 +87,13 @@ class MessageBoard extends Component {
 
   render () {
     const boardPosts = this.state.posts
+    const timeChange = time => moment(time).format('LLL')
+
     return (
       <div>
         {boardPosts.map(post => (
           <Wrapper key={post.id}>
-            <p>Posted by {post.owner.email}, last updated at {post.updated_at}</p>
+            <p>Posted by {post.owner.email}, last updated at {timeChange(post.updated_at)}</p>
             <h3>{post.title}</h3>
             <h6>{post.content}</h6>
             <Link to={`/posts/${post.id}/`}><StylishButton>See Post</StylishButton></Link>

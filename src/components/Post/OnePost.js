@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import CreateComment from '../Comment/CreateComment'
 import Comments from '../Comment/Comments'
+// import VoteTally from '../Votes/VoteTally'
 // import messages from '../AutoDismissAlert/messages'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
@@ -30,6 +31,21 @@ const GridWrapper = styled.div`
     border: 1px solid #82858D;
   }
 `
+const LikeButtonWrapper = styled.div`
+  /* background: #D3D3D3; */
+  border-radius: 4px;
+  /* border: 2px solid #2F4F4F; */
+  margin: 0 auto;
+  padding: 0.25em 1em;
+  grid-template-rows: [row1-start] 40% [row1-end] 20% [third-line] auto [last-line];
+
+  & div {
+    height: 20px;
+    width: 20px;
+    margin: 0 auto;
+    text-align: center;
+  }
+`
 
 const PostWrapper = styled.div`
   margin: 0.5em 0.5em;
@@ -40,8 +56,8 @@ const PostWrapper = styled.div`
   }
 `
 const ButtonWrapper = styled.div`
-  align-self: end;
-  justify-self: end;
+  align-self: center;
+  justify-self: center;
 `
 
 const StylishButton = styled.button`
@@ -60,6 +76,11 @@ const StylishButton = styled.button`
   }
 `
 
+const StyledSvg = styled.svg`
+  align-self: center;
+  display: inline-flex;
+`
+
 class OnePost extends Component {
   constructor (props) {
     super(props)
@@ -69,12 +90,15 @@ class OnePost extends Component {
         title: '',
         content: '',
         owner: {},
-        comments: []
+        comments: [],
+        votes: 0
       }
 
     }
     this.handleDelete = this.handleDelete.bind(this)
     // this.handleSubmit = this.handleSubmit.bind(this)
+    this.upVote = this.upVote.bind(this)
+    this.downVote = this.downVote.bind(this)
   }
 
   // make API call to get single post with comments
@@ -131,7 +155,22 @@ class OnePost extends Component {
       ))
   }
 
+  upVote = () => {
+    // set state of the event target's name as the value
+    const postCopy = Object.assign({}, this.state.post)
+    postCopy['votes'] = postCopy['votes'] + 1
+    this.setState({ post: postCopy })
+  }
+
+  downVote = () => {
+    // set state of the event target's name as the value
+    const postCopy = Object.assign({}, this.state.post)
+    postCopy['votes'] = postCopy['votes'] - 1
+    this.setState({ post: postCopy })
+  }
+
   render () {
+    console.log(this.state.post.votes)
     const userOptions = (
       <ButtonWrapper>
         <Link to={`/posts/${this.state.post.id}/edit/`}><StylishButton><svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -144,6 +183,17 @@ class OnePost extends Component {
         </svg> Delete</StylishButton>
       </ButtonWrapper>
     )
+    const voteTally = (
+      <LikeButtonWrapper>
+        <StylishButton onClick={this.upVote}><StyledSvg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-caret-up-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+        </StyledSvg></StylishButton>
+        <div>{ this.state.post.votes }</div>
+        <StylishButton onClick={this.downVote}><StyledSvg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+        </StyledSvg></StylishButton>
+      </LikeButtonWrapper>
+    )
     return (
       <Wrapper>
         <GridWrapper>
@@ -153,7 +203,7 @@ class OnePost extends Component {
             <h6>{this.state.post.content}</h6>
           </PostWrapper>
 
-          { this.props.user.id === this.state.post.owner.id ? userOptions : ''}
+          { this.props.user.id === this.state.post.owner.id ? userOptions : voteTally }
 
         </GridWrapper>
 

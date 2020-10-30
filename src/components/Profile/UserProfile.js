@@ -88,7 +88,7 @@ class UserProfile extends Component {
     return (
       <div>
 
-        <h2>All posts by...</h2>
+        <h2>All your posts</h2>
         {boardPosts.map(post => (
           <Wrapper key={post.id}>
             <p>Posted by {post.owner.email}, last updated at {post.updated_at}</p>
