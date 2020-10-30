@@ -9,7 +9,7 @@ import apiUrl from '../../apiConfig'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  background: #D3D3D3;
+  background: #F1FAEE;
   border-radius: 3px;
   border: 2px solid #2F4F4F;
   margin: 0.75em 1em;
@@ -35,6 +35,11 @@ const StylishButton = styled.button`
   color: #F9F9F9;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
+
+  &:hover {
+    background: #2F4F4F;
+    border: 2px solid #blue;
+  }
 `
 
 class MessageBoard extends Component {

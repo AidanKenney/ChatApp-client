@@ -27,6 +27,11 @@ const StylishButton = styled.button`
   width: 30px;
   margin: 0.7rem 0.3rem;
   padding: 0.0em 0.0em;
+
+  &:hover {
+    background: #2F4F4F;
+    border: 2px solid #blue;
+  }
 `
 
 const StyledSvg = styled.svg`

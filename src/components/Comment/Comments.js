@@ -34,6 +34,11 @@ const StylishButton = styled.button`
   color: #F9F9F9;
   margin: 0.5em 0.15em;
   padding: 0.25em 0.5em;
+
+  &:hover {
+    background: #2F4F4F;
+    border: 2px solid #blue;
+  }
 `
 
 class Comments extends Component {

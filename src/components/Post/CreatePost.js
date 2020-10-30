@@ -28,6 +28,11 @@ const StylishButton = styled.button`
   color: #F9F9F9;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
+
+  &:hover {
+    background: #2F4F4F;
+    border: 2px solid #blue;
+  }
 `
 
 class CreatePost extends Component {

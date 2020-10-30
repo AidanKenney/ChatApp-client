@@ -24,8 +24,8 @@ const authenticatedOptions = (
 // )
 
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
-    <Navbar.Brand href="#">
+  <Navbar className="header" expand="md">
+    <Navbar.Brand className="header" href="#">
       Message Board
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
