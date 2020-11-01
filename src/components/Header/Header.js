@@ -10,23 +10,10 @@ const authenticatedOptions = (
   </Fragment>
 )
 
-// const unauthenticatedOptions = (
-//   <Fragment>
-//     // <Nav.Link href="#sign-up">Sign Up</Nav.Link>
-//     // <Nav.Link href="#sign-in">Sign In</Nav.Link>
-//   </Fragment>
-// )
-
-// const alwaysOptions = (
-//   <Fragment>
-//     <Nav.Link href="#">Home</Nav.Link>
-//   </Fragment>
-// )
-
 const Header = ({ user }) => (
   <Navbar className="header" expand="md">
     <Navbar.Brand className="header" href="#posts/">
-      Message Board
+      The Feed
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

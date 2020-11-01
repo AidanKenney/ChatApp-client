@@ -1,5 +1,0 @@
----
-title: Earbuds
-categories:
-tags:
----

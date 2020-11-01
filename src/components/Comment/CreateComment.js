@@ -1,44 +1,13 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-// import messages from '../AutoDismissAlert/messages'
+
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 import Form from 'react-bootstrap/Form'
-// import Button from 'react-bootstrap/Button'
-import styled from 'styled-components'
-
-const FormWrapper = styled.form`
-  background: #F4F4F2;
-  border-radius: 3px;
-  border: 1px solid #BBBFCA;
-  display: flex;
-  flex-direction: row;
-  margin: 1em 1em;
-  padding: 0.25em 1em;
-`
-
-const StylishButton = styled.button`
-  background: #3F88C5;
-  border-radius: 4px;
-  border: 2px solid #BBBFCA;
-  color: #F9F9F9;
-  height: 30px;
-  width: 30px;
-  margin: 0.7rem 0.3rem;
-  padding: 0.0em 0.0em;
-
-  &:hover {
-    background: #F9F9F9;
-    border: 2px solid #E94F37;
-    color: #3F88C5;
-  }
-`
-
-const StyledSvg = styled.svg`
-  align-self: center;
-  display: inline-flex;
-`
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { StylishButton, FormWrapper } from '../StyledComponents/StyledComponents'
 
 class CreateComment extends Component {
   constructor (props) {
@@ -58,8 +27,6 @@ class CreateComment extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log('state is', this.state)
-    console.log('this.props is', this.props)
 
     // make API call
     axios({
@@ -117,9 +84,7 @@ class CreateComment extends Component {
                 onChange={this.handleChange} />
             </Form.Group>
 
-            <StylishButton type="submit" className="btn btn-primary" ><StyledSvg width="1.5em" height="1.5em" viewBox="0 0 16 16" className="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-            </StyledSvg></StylishButton>
+            <StylishButton type="submit" className="btn btn-primary" ><FontAwesomeIcon icon={faPlus} /></StylishButton>
           </FormWrapper>
         </div>
       </div>

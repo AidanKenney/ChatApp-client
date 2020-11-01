@@ -4,47 +4,9 @@ import { withRouter, Link } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
-// // import Form from 'react-bootstrap/Form'
-// import Button from 'react-bootstrap/Button'
-import styled from 'styled-components'
-
-const CommentWrapper = styled.div`
-  background: #F4F4F2;
-  border-radius: 3px;
-  border: 1px solid #BBBFCA;
-  display: grid;
-  grid-template-columns: [first] 75% [line2] 25% [end];
-  margin: 11px 1em;
-  padding: 0.25em 1em;
-
-  &:hover {
-    border: 1px solid #82858D;
-  }
-`
-const ContentWrapper = styled.div`
-  margin: 0.5em 0.5em;
-  word-wrap: break-word;
-`
-
-const ButtonWrapper = styled.div`
-  align-self: end;
-  justify-self: end;
-`
-
-const StylishButton = styled.button`
-  background: #3F88C5;
-  border-radius: 4px;
-  border: 2px solid #BBBFCA;
-  color: #F9F9F9;
-  margin: 0.5em 0.15em;
-  padding: 0.25em 0.5em;
-
-  &:hover {
-    background: #F9F9F9;
-    border: 2px solid #E94F37;
-    color: #3F88C5;
-  }
-`
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { StylishButton, GridWrapper, ButtonWrapper, ContentWrapper } from '../StyledComponents/StyledComponents'
 
 class Comments extends Component {
   constructor (props) {
@@ -54,7 +16,6 @@ class Comments extends Component {
       comments: []
     }
     this.handleDelete = this.handleDelete.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleDelete = event => {
@@ -87,27 +48,21 @@ class Comments extends Component {
 
     const userOptions = (comment) => (
       <ButtonWrapper>
-        <Link to={`/comments/${comment.id}/edit/`}><StylishButton><svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-          <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-        </svg></StylishButton></Link>
-        <StylishButton id={comment.id} onClick={this.handleDelete}><svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-          <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-        </svg></StylishButton>
+        <Link to={`/comments/${comment.id}/edit/`}><StylishButton><FontAwesomeIcon icon={faEdit} /></StylishButton></Link>
+        <StylishButton id={comment.id} onClick={this.handleDelete}><FontAwesomeIcon icon={faTrashAlt} /></StylishButton>
       </ButtonWrapper>
     )
 
     return (
       <div>
         {commentsOnPost.map(comment => (
-          <CommentWrapper key={comment.id}>
+          <GridWrapper key={comment.id}>
 
             <ContentWrapper>{comment.content}, by <Link to={`/profile/${comment.owner.id}`}>{comment.owner.email}</Link></ContentWrapper>
 
             { this.props.user.id === comment.owner.id ? userOptions(comment) : '' }
 
-          </CommentWrapper>
+          </GridWrapper>
         ))}
       </div>
     )

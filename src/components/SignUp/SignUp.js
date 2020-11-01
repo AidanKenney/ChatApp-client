@@ -5,7 +5,7 @@ import { signUp, signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import { BoardButton, BasicWrapper } from '../StyledComponents/StyledComponents'
 
 class SignUp extends Component {
   constructor () {
@@ -51,11 +51,10 @@ class SignUp extends Component {
 
     return (
       <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
+        <BasicWrapper className="col-sm-10 col-md-8 mx-auto mt-5" auth>
           <h3>Sign Up</h3>
           <Form onSubmit={this.onSignUp}>
             <Form.Group controlId="email">
-              <Form.Label>Email address</Form.Label>
               <Form.Control
                 required
                 type="email"
@@ -66,7 +65,6 @@ class SignUp extends Component {
               />
             </Form.Group>
             <Form.Group controlId="password">
-              <Form.Label>Password</Form.Label>
               <Form.Control
                 required
                 name="password"
@@ -77,7 +75,6 @@ class SignUp extends Component {
               />
             </Form.Group>
             <Form.Group controlId="passwordConfirmation">
-              <Form.Label>Password Confirmation</Form.Label>
               <Form.Control
                 required
                 name="passwordConfirmation"
@@ -87,14 +84,14 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Button
+            <BoardButton
               variant="primary"
               type="submit"
             >
               Submit
-            </Button>  <Link to="/sign-in/">Have an account?</Link>
+            </BoardButton>  <Link to="/sign-in/">Have an account?</Link>
           </Form>
-        </div>
+        </BasicWrapper>
       </div>
     )
   }
