@@ -7,7 +7,7 @@ import apiUrl from '../../apiConfig'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons'
-import { StylishButton, GridWrapper, ButtonWrapper, PostWrapper, LikeButtonWrapper, Wrapper } from '../StyledComponents/StyledComponents'
+import { StylishButton, GridWrapper, ButtonWrapper, PostWrapper, LikeButtonWrapper, LikeFeatureWrapper, Wrapper } from '../StyledComponents/StyledComponents'
 
 class OnePost extends Component {
   constructor (props) {
@@ -19,7 +19,7 @@ class OnePost extends Component {
         content: '',
         owner: {},
         comments: [],
-        votes: 0
+        votes: []
       }
 
     }
@@ -82,17 +82,89 @@ class OnePost extends Component {
   }
 
   upVote = () => {
-    // set state of the event target's name as the value
-    const postCopy = Object.assign({}, this.state.post)
-    postCopy['votes'] = postCopy['votes'] + 1
-    this.setState({ post: postCopy })
+    event.preventDefault()
+    // if this post has not already been voted on my the user, let them vote
+    if (this.state.post.votes.filter(item => item.owner.id === this.props.user.id).length === 0) {
+      axios({
+        url: apiUrl + '/votes/',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${this.props.user.token}`
+        },
+        data: {
+          vote: {
+            up_or_down: true,
+            owner: this.props.user,
+            post: this.props.match.params.id
+          }
+        }
+      })
+      // handle success / failure
+        .then(() => (
+          this.props.msgAlert({
+            heading: 'Create Success',
+            variant: 'success',
+            message: 'You voted!'
+          })
+        ))
+        .catch(() => (
+          this.props.msgAlert({
+            heading: 'Create Failure',
+            variant: 'danger',
+            message: 'Error,vote failed'
+          })
+        ))
+    } else {
+      this.props.msgAlert({
+        heading: 'Vote Failed',
+        variant: 'danger',
+        message: 'You have already voted on this post'
+      })
+    }
   }
 
   downVote = () => {
-    // set state of the event target's name as the value
-    const postCopy = Object.assign({}, this.state.post)
-    postCopy['votes'] = postCopy['votes'] - 1
-    this.setState({ post: postCopy })
+    event.preventDefault()
+    // if this post has not already been voted on my the user, let them vote
+    if (this.state.post.votes.filter(item => item.owner.id === this.props.user.id).length === 0) {
+      axios({
+        url: apiUrl + '/votes/',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${this.props.user.token}`
+        },
+        data: {
+          vote: {
+            up_or_down: false,
+            owner: this.props.user,
+            post: this.props.match.params.id
+          }
+        }
+      })
+      // handle success / failure
+        .then(() => (
+          this.props.msgAlert({
+            heading: 'Create Success',
+            variant: 'success',
+            message: 'You voted!'
+          })
+        ))
+        .catch(() => (
+          this.props.msgAlert({
+            heading: 'Create Failure',
+            variant: 'danger',
+            message: 'Error,vote failed'
+          })
+        ))
+    } else {
+      this.props.msgAlert({
+        heading: 'Vote Failed',
+        variant: 'danger',
+        message: 'You have already voted on this post'
+      })
+    }
   }
 
   render () {
@@ -103,11 +175,16 @@ class OnePost extends Component {
       </ButtonWrapper>
     )
     const voteTally = (
-      <LikeButtonWrapper>
-        <StylishButton onClick={this.upVote}><FontAwesomeIcon className="caret" icon={faCaretUp} /></StylishButton>
-        <div>{ this.state.post.votes }</div>
-        <StylishButton onClick={this.downVote}><FontAwesomeIcon className="caret" icon={faCaretDown} /></StylishButton>
-      </LikeButtonWrapper>
+      <LikeFeatureWrapper className="row">
+        <LikeButtonWrapper className="col-6">
+          <div>{ this.state.post.votes.filter(item => item.up_or_down === true).length }</div>
+          <StylishButton onClick={this.upVote}><FontAwesomeIcon className="caret" icon={faCaretUp} /></StylishButton>
+        </LikeButtonWrapper>
+        <LikeButtonWrapper className="col-6">
+          <div>{ this.state.post.votes.filter(item => item.up_or_down === false).length }</div>
+          <StylishButton onClick={this.downVote}><FontAwesomeIcon className="caret" icon={faCaretDown} /></StylishButton>
+        </LikeButtonWrapper>
+      </LikeFeatureWrapper>
     )
     return (
       <Wrapper>

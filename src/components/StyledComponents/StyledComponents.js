@@ -92,7 +92,7 @@ export const LikeButtonWrapper = styled.div`
    border-radius: 4px;
    margin: 0 auto;
    padding: 0.25em 1em;
-   grid-template-rows: [row1-start] 40% [row1-end] 20% [third-line] auto [last-line];
+   grid-template-rows: [row1-start] 5% [row1-end] 20% [second-line] auto [last-line];
 
    & div {
      height: 20px;
@@ -101,6 +101,12 @@ export const LikeButtonWrapper = styled.div`
      text-align: center;
    }
  `
+export const LikeFeatureWrapper = styled.div`
+    align-content: center;
+    border-radius: 4px;
+    margin: 0 auto;
+    padding: 0.25em 1em;
+  `
 
 export const PostWrapper = styled.div`
    margin: 0.5em 0.5em;
