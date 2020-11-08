@@ -14,8 +14,14 @@ export const StylishButton = styled.button`
     color: #3F88C5;
   }
 
-  .caret {
-    font-size: 1.5em;
+  &:disabled {
+    background: #DCDCDC;
+    border: 2px solid #BBBFCA;
+    color: #696969;
+  }
+
+  .thumbs {
+    font-size: 1.2em;
   }
 `
 export const BoardButton = styled(StylishButton)`

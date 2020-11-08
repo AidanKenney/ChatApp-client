@@ -6,7 +6,7 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faEdit, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faEdit, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons'
 import { StylishButton, GridWrapper, ButtonWrapper, PostWrapper, LikeButtonWrapper, LikeFeatureWrapper, Wrapper } from '../StyledComponents/StyledComponents'
 
 class OnePost extends Component {
@@ -174,15 +174,16 @@ class OnePost extends Component {
         <StylishButton onClick={this.handleDelete}><FontAwesomeIcon icon={faTrashAlt} /> Delete</StylishButton>
       </ButtonWrapper>
     )
+    const noVotes = this.state.post.votes.filter(item => item.owner.id === this.props.user.id).length === 0
     const voteTally = (
       <LikeFeatureWrapper className="row">
         <LikeButtonWrapper className="col-6">
           <div>{ this.state.post.votes.filter(item => item.up_or_down === true).length }</div>
-          <StylishButton onClick={this.upVote}><FontAwesomeIcon className="caret" icon={faCaretUp} /></StylishButton>
+          <StylishButton disabled={!noVotes} onClick={this.upVote}><FontAwesomeIcon className="thumbs" icon={faThumbsUp} /></StylishButton>
         </LikeButtonWrapper>
         <LikeButtonWrapper className="col-6">
           <div>{ this.state.post.votes.filter(item => item.up_or_down === false).length }</div>
-          <StylishButton onClick={this.downVote}><FontAwesomeIcon className="caret" icon={faCaretDown} /></StylishButton>
+          <StylishButton disabled={!noVotes} onClick={this.downVote}><FontAwesomeIcon className="thumbs" icon={faThumbsDown} /></StylishButton>
         </LikeButtonWrapper>
       </LikeFeatureWrapper>
     )
