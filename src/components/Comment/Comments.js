@@ -60,7 +60,7 @@ class Comments extends Component {
 
             <ContentWrapper>{comment.content}, by <Link to={`/profile/${comment.owner.id}`}>{comment.owner.email}</Link></ContentWrapper>
 
-            { this.props.user.id === comment.owner.id ? userOptions(comment) : '' }
+            { this.props.user && this.props.user.id === comment.owner.id ? userOptions(comment) : '' }
 
           </GridWrapper>
         ))}

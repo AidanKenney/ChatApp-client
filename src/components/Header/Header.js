@@ -10,6 +10,13 @@ const authenticatedOptions = (
   </Fragment>
 )
 
+const unauthenticatedOptions = (
+  <Fragment>
+    <Nav.Link href="#sign-up">Sign Up</Nav.Link>
+    <Nav.Link href="#posts">Posts</Nav.Link>
+  </Fragment>
+)
+
 const Header = ({ user }) => (
   <Navbar className="header" expand="md">
     <Navbar.Brand className="header" href="#posts/">
@@ -19,7 +26,7 @@ const Header = ({ user }) => (
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
         { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
-        { user ? authenticatedOptions : '' }
+        { user ? authenticatedOptions : unauthenticatedOptions }
       </Nav>
     </Navbar.Collapse>
   </Navbar>

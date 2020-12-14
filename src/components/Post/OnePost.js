@@ -34,8 +34,8 @@ class OnePost extends Component {
       url: apiUrl + '/posts/' + this.props.match.params.id + '/',
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${this.props.user.token}`
+        'Content-Type': 'application/json'
+        // 'Authorization': `Token ${this.props.user.token}`
       }
     })
       .then(res => this.setState({ post: res.data.post }))
@@ -47,8 +47,8 @@ class OnePost extends Component {
         url: apiUrl + '/posts/' + this.props.match.params.id + '/',
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Token ${this.props.user.token}`
+          'Content-Type': 'application/json'
+          // 'Authorization': `Token ${this.props.user.token}`
         }
       })
         .then(res => this.setState({ post: res.data.post }))
@@ -132,8 +132,8 @@ class OnePost extends Component {
         url: apiUrl + '/votes/',
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Token ${this.props.user.token}`
+          'Content-Type': 'application/json'
+          // 'Authorization': `Token ${this.props.user.token}`
         },
         data: {
           vote: {
@@ -174,7 +174,7 @@ class OnePost extends Component {
         <StylishButton onClick={this.handleDelete}><FontAwesomeIcon icon={faTrashAlt} /> Delete</StylishButton>
       </ButtonWrapper>
     )
-    const noVotes = this.state.post.votes.filter(item => item.owner.id === this.props.user.id).length === 0
+    const noVotes = this.props.user && this.state.post.votes.filter(item => item.owner.id === this.props.user.id).length === 0
     const voteTally = (
       <LikeFeatureWrapper className="row">
         <LikeButtonWrapper className="col-6">
@@ -187,6 +187,7 @@ class OnePost extends Component {
         </LikeButtonWrapper>
       </LikeFeatureWrapper>
     )
+
     return (
       <Wrapper>
         <GridWrapper>
@@ -196,7 +197,11 @@ class OnePost extends Component {
             <h6>{this.state.post.content}</h6>
           </PostWrapper>
 
-          { this.props.user.id === this.state.post.owner.id ? userOptions : voteTally }
+          { this.props.user &&
+            this.props.user.id === this.state.post.owner.id
+            ? userOptions
+            : voteTally
+          }
 
         </GridWrapper>
 

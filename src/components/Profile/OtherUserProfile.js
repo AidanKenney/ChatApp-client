@@ -22,8 +22,8 @@ class UserProfile extends Component {
       url: apiUrl + '/posts/',
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${this.props.user.token}`
+        'Content-Type': 'application/json'
+        // 'Authorization': `Token ${this.props.user.token}`
       }
     })
       .then(res => res.data.posts.filter(post => post.owner.id === parseInt(this.props.match.params.id)))

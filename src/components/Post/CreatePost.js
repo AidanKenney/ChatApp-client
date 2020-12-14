@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { Component, Fragment } from 'react'
+import { withRouter, Link } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 import Form from 'react-bootstrap/Form'
-import { BoardButton, BasicWrapper } from '../StyledComponents/StyledComponents'
+import { BoardButton, BasicWrapper, SignUpButtonWrapper, SignUpButton } from '../StyledComponents/StyledComponents'
 
 class CreatePost extends Component {
   constructor (props) {
@@ -64,7 +64,7 @@ class CreatePost extends Component {
   }
 
   render () {
-    return (
+    const loggedInUser = (
       <BasicWrapper>
         <Form onSubmit={this.handleSubmit}>
           <label>Create a post, start talking</label>
@@ -95,6 +95,17 @@ class CreatePost extends Component {
           <BoardButton type="submit" className="btn btn-primary pull-right" >Add Post</BoardButton>
         </Form>
       </BasicWrapper>
+    )
+
+    const noLoggedInUser = (
+      <SignUpButtonWrapper><Link to="/sign-up/"><SignUpButton>Sign in to make a post</SignUpButton></Link>
+      </SignUpButtonWrapper>
+    )
+
+    return (
+      <Fragment>
+        { this.props.user ? loggedInUser : noLoggedInUser }
+      </Fragment>
     )
   }
 }

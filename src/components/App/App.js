@@ -64,13 +64,13 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password/' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute exact user={user} path='/posts/' render={() => (
+          <Route exact user={user} path='/posts/' render={() => (
             <CreatePost msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute exact user={user} path='/posts/' render={() => (
+          <Route exact user={user} path='/posts/' render={() => (
             <MessageBoard msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute exact user={user} path='/posts/:id/' render={() => (
+          <Route exact user={user} path='/posts/:id/' render={() => (
             <OnePost msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute exact user={user} path='/posts/:id/edit/' render={() => (
@@ -82,7 +82,7 @@ class App extends Component {
           <AuthenticatedRoute exact user={user} path='/profile/' render={() => (
             <UserProfile msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute exact user={user} path='/profile/:id/' render={() => (
+          <Route exact user={user} path='/profile/:id/' render={() => (
             <OtherUserProfile msgAlert={this.msgAlert} user={user}/>
           )} />
         </main>

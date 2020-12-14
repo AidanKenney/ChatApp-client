@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
@@ -7,7 +7,7 @@ import apiUrl from '../../apiConfig'
 import Form from 'react-bootstrap/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { StylishButton, FormWrapper } from '../StyledComponents/StyledComponents'
+import { StylishButton, FormWrapper, BasicWrapper } from '../StyledComponents/StyledComponents'
 
 class CreateComment extends Component {
   constructor (props) {
@@ -66,27 +66,35 @@ class CreateComment extends Component {
   }
 
   render () {
+    const loggedInUser = (
+      <div className="form-area">
+        <FormWrapper onSubmit={this.handleSubmit}>
+          <br styles="clear:both" />
+          <Form.Group controlId="content" className="form-group">
+            <Form.Control
+              required
+              type="text"
+              as="textarea"
+              name="content"
+              placeholder="Add a comment"
+              maxLength="200"
+              rows="1"
+              value={this.state.content}
+              onChange={this.handleChange} />
+          </Form.Group>
+
+          <StylishButton type="submit" className="btn btn-primary" ><FontAwesomeIcon icon={faPlus} /></StylishButton>
+        </FormWrapper>
+      </div>
+    )
+    const noLoggedInUser = (
+      <BasicWrapper>
+        <Link to="/sign-up/">Sign in to make a comment</Link>
+      </BasicWrapper>
+    )
     return (
       <div>
-        <div className="form-area">
-          <FormWrapper onSubmit={this.handleSubmit}>
-            <br styles="clear:both" />
-            <Form.Group controlId="content" className="form-group">
-              <Form.Control
-                required
-                type="text"
-                as="textarea"
-                name="content"
-                placeholder="Add a comment"
-                maxLength="200"
-                rows="1"
-                value={this.state.content}
-                onChange={this.handleChange} />
-            </Form.Group>
-
-            <StylishButton type="submit" className="btn btn-primary" ><FontAwesomeIcon icon={faPlus} /></StylishButton>
-          </FormWrapper>
-        </div>
+        { this.props.user ? loggedInUser : noLoggedInUser }
       </div>
     )
   }

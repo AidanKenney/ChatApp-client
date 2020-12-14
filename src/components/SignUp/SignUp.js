@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 
 import { signUp, signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
-import { BoardButton, BasicWrapper } from '../StyledComponents/StyledComponents'
+import { BoardButton, BasicWrapper, SignUpButton, SignUpButtonWrapper } from '../StyledComponents/StyledComponents'
 
 class SignUp extends Component {
   constructor () {
@@ -50,49 +50,53 @@ class SignUp extends Component {
     const { email, password, passwordConfirmation } = this.state
 
     return (
-      <div className="row">
-        <BasicWrapper className="col-sm-10 col-md-8 mx-auto mt-5" auth>
-          <h3>Sign Up</h3>
-          <Form onSubmit={this.onSignUp}>
-            <Form.Group controlId="email">
-              <Form.Control
-                required
-                type="email"
-                name="email"
-                value={email}
-                placeholder="Enter email"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="password">
-              <Form.Control
-                required
-                name="password"
-                value={password}
-                type="password"
-                placeholder="Password"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="passwordConfirmation">
-              <Form.Control
-                required
-                name="passwordConfirmation"
-                value={passwordConfirmation}
-                type="password"
-                placeholder="Confirm Password"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <BoardButton
-              variant="primary"
-              type="submit"
-            >
-              Submit
-            </BoardButton>  <Link to="/sign-in/">Have an account?</Link>
-          </Form>
-        </BasicWrapper>
-      </div>
+      <Fragment>
+        <SignUpButtonWrapper><Link to="/posts/"><SignUpButton>Go straight to posts</SignUpButton></Link>
+        </SignUpButtonWrapper>
+        <div className="row">
+          <BasicWrapper className="col-sm-10 col-md-8 mx-auto mt-1" auth>
+            <h3>Sign Up</h3>
+            <Form onSubmit={this.onSignUp}>
+              <Form.Group controlId="email">
+                <Form.Control
+                  required
+                  type="email"
+                  name="email"
+                  value={email}
+                  placeholder="Enter email"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="password">
+                <Form.Control
+                  required
+                  name="password"
+                  value={password}
+                  type="password"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="passwordConfirmation">
+                <Form.Control
+                  required
+                  name="passwordConfirmation"
+                  value={passwordConfirmation}
+                  type="password"
+                  placeholder="Confirm Password"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <BoardButton
+                variant="primary"
+                type="submit"
+              >
+                Submit
+              </BoardButton>  <Link to="/sign-in/">Have an account?</Link>
+            </Form>
+          </BasicWrapper>
+        </div>
+      </Fragment>
     )
   }
 }

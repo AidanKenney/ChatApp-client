@@ -20,8 +20,8 @@ class MessageBoard extends Component {
       url: apiUrl + '/posts/',
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${this.props.user.token}`
+        'Content-Type': 'application/json'
+        // 'Authorization': `Token ${this.props.user.token}`
       }
     })
       .then(res => this.setState({ posts: res.data.posts }))
@@ -34,8 +34,8 @@ class MessageBoard extends Component {
         url: apiUrl + '/posts/',
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Token ${this.props.user.token}`
+          'Content-Type': 'application/json'
+          // 'Authorization': `Token ${this.props.user.token}`
         }
       })
         .then(res => this.setState({ posts: res.data.posts }))

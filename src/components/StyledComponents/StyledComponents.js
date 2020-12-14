@@ -127,3 +127,32 @@ export const ContentWrapper = styled.div`
    margin: 0.5em 0.5em;
    word-wrap: break-word;
  `
+
+export const SignUpButton = styled.div`
+  background: #3F88C5;
+  border-radius: 4px;
+  border: 2px solid #BBBFCA;
+  color: #F9F9F9;
+  margin: 0.5em 0.15em;
+  padding: 0.25em 0.5em;
+  max-width: 165px;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    background: #F9F9F9;
+    border: 2px solid #E94F37;
+    color: #3F88C5;
+    text-decoration: none;
+  }
+
+  &:disabled {
+    background: #DCDCDC;
+    border: 2px solid #BBBFCA;
+    color: #696969;
+  }
+  `
+export const SignUpButtonWrapper = styled.div`
+   display: flex;
+   justify-content: center;
+ `
